@@ -2,6 +2,7 @@ package my.shin.apipractice_20200613
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_sing_up.*
 
 class SingUpActivity : BaseAcitivity() {
 
@@ -11,6 +12,14 @@ class SingUpActivity : BaseAcitivity() {
     }
 
     override fun setupevents() {
+
+        emailCheckBtn.setOnClickListener {
+//            입력한 이메일이 이미 회원으로 있는지 확인 => 서버에 요청
+
+            val inputEmail = emailEdt.text.toString()
+
+
+        }
 
     }
 

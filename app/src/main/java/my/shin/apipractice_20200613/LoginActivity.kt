@@ -1,5 +1,6 @@
 package my.shin.apipractice_20200613
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -20,6 +21,11 @@ class LoginActivity : BaseAcitivity() {
 
 
     override fun setupevents() {
+
+        signUPBtn.setOnClickListener {
+            val myIntent = Intent(mcontext, SingUpActivity::class.java)
+            startActivity(myIntent)
+        }
 
         loginBtn.setOnClickListener {
             val inputEmail = emailEdt.text.toString()
@@ -64,7 +70,6 @@ class LoginActivity : BaseAcitivity() {
 //                        그 외의 숫자 ㅣ 로그인 실패
 //                        실패 사유 : message에 적힌 String을 확인하자. => Toast로 출력
                         val message = Json.getString("message")
-d
 //                        인터넷 연결 쓰레드가 아닌, UI 담당쓰레드가
 
                         runOnUiThread {
