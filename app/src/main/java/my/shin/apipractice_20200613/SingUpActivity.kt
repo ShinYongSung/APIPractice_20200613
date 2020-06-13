@@ -20,6 +20,8 @@ class SingUpActivity : BaseAcitivity() {
 
     override fun setupevents() {
 
+        signUPBtn.
+
         emailEdt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
@@ -82,7 +84,7 @@ class SingUpActivity : BaseAcitivity() {
         }
 
 
-        emailCheckBtn.setOnClickListener {
+        emailcheckBtn.setOnClickListener {
 //            입력한 이메일이 이미 회원으로 있는지 확인 => 서버에 요청
 
             val inputEmail = emailEdt.text.toString()
