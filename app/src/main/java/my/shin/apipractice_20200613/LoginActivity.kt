@@ -63,8 +63,8 @@ class LoginActivity : BaseAcitivity() {
                     else{
 //                        그 외의 숫자 ㅣ 로그인 실패
 //                        실패 사유 : message에 적힌 String을 확인하자. => Toast로 출력
-                        val message = json.getString("message")
-
+                        val message = Json.getString("message")
+d
 //                        인터넷 연결 쓰레드가 아닌, UI 담당쓰레드가
 
                         runOnUiThread {
