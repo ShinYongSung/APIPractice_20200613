@@ -16,7 +16,7 @@ class SeverUtil {
 //        어느 서버로 가야하는지(HOST 주소) 적어두는 변수
         val BASE_URL = "http://15.165.177.142"
 
-        fun getRequestDuplicatedCheck(context: Context, checkType:String, inputVal: JsonResponseHandler, handler: JsonResponseHandler?) {
+        fun getRequestDuplicatedCheck(context: Context, checkType:String, inputVal: String, handler: JsonResponseHandler?) {
             val  client = OkHttpClient()
 
 //            get방식은 어디로 갈지 주소 + 어떤데이터를 보낼지 같이 표시됨.
@@ -57,7 +57,6 @@ class SeverUtil {
                     handler?.onResponse(json)
                 }
             })
-
 
 
         }
