@@ -155,8 +155,12 @@ class SingUpActivity : BaseAcitivity() {
 
                     val code = json.getInt("code")
                     if (code == 200) {
-                       emailCheckResultTxt.text = "사용해도 좋습니다."
-                        isEmailDuplOk = true
+                        runOnUiThread {
+                            emailCheckResultTxt.text = "사용해도 좋습니다."
+                            isEmailDuplOk = true
+                        }
+
+
                     }
                     else{
                         runOnUiThread { emailCheckResultTxt.text = "이미 사용중입니다. 다른 이멩일로 다시 체크해주세요."
