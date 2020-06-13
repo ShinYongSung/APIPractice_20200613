@@ -3,6 +3,7 @@ package my.shin.utils
 import android.content.Context
 import android.util.Log
 import okhttp3.*
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.json.JSONObject
 import java.io.IOException
 
@@ -14,6 +15,52 @@ class SeverUtil {
 
 //        어느 서버로 가야하는지(HOST 주소) 적어두는 변수
         val BASE_URL = "http://15.165.177.142"
+
+        fun getRequestDuplicatedCheck(context: Context, checkType:String, inputVal: JsonResponseHandler, handler: JsonResponseHandler?) {
+            val  client = OkHttpClient()
+
+//            get방식은 어디로 갈지 주소 + 어떤데이터를 보낼지 같이 표시됨.
+//            주소를 만들때 데이터 첨부까지 같이 진행해야되 엄곤지 멍충잇!!!!!!
+//            중복검사 주소 배치 => 이 뒤에 파라미터 첨부ㅏㄹ 수 있도록 builder로 만듦
+            val urlBuilder = "${BASE_URL}/user_check".toHttpUrlOrNull()!!.newBuilder()
+//            val urlBuilder = HttpUrl.parse("${BASE_URL}/user_check")!!.newBuilder()
+//            만든 주소 변수에 파라미터 첨부 (parse는 옛날 문법이라 자동 변경가능)
+            urlBuilder.addEncodedQueryParameter("type",checkType)
+            urlBuilder.addEncodedQueryParameter("value", inputVal)
+
+//            첨부 데이터가 포홤된 주소 확인
+            val urlString = urlBuilder.build().toString()
+            Log.d("완성된주소",urlString)
+
+//            Request를 만들어서 최종 전송 정보 마무리
+            val request = Request.Builder()
+                .url(urlString)
+                .get()
+//                .header()  헤더를 요구하면 추가
+                .build()
+
+            client.newCall(request).enqueue(object  : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+//                    서버에 연결 자체를 실패했을 경우
+                }
+                override fun onResponse(call: Call, response: Response) {
+//                    서버에서 응답을 잘 받아왔을 경우
+//                    응답 중에서 body(내용물)을 string으로 저장
+
+                    val bodyString = response.body!!.string()
+
+//                    저장한 String을 JSONObject 양식으로 가공
+                    val json = JSONObject(bodyString)
+                    Log.d("JSON응답", json.toString())
+
+//                    화면(액티비티)에 만들어낸 json 변수를 전달
+                    handler?.onResponse(json)
+                }
+            })
+
+
+
+        }
 
 //        서버에 로그인 요청 함수
 //        context / handler 필수로 적어주자.
