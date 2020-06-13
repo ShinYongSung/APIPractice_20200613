@@ -40,13 +40,22 @@ class LoginActivity : BaseAcitivity() {
                     val codeNum = json.getInt("code")
 
                     if (codeNum == 200) {
-
+//                        로그인 아이디 방법
                         val data = json.getJSONObject("data")
-                        val user = data.getJSONObject("user")
-                        val loginUserNickName = user.getString("nick_name")
+                        val user = json.getJSONObject("user")
+                        val email = user.getString("email")
 
                         runOnUiThread {
-                            Toast.makeText(mcontext, "${loginUserNickName}님 환영합니다.",Toast.LENGTH_SHORT ).show()
+                            Toast.makeText(mcontext, "${email}님 환영합니다.", Toast.LENGTH_SHORT).show()
+                        }
+
+//                      닉네임 방법
+//                        val data = json.getJSONObject("data")
+//                        val user = data.getJSONObject("user")
+//                        val loginUserNickName = user.getString("nick_name")
+//
+//                        runOnUiThread {
+//                            Toast.makeText(mcontext, "${loginUserNickName}님 환영합니다.",Toast.LENGTH_SHORT ).show()
 
                         }
 //                        로그인 성공
