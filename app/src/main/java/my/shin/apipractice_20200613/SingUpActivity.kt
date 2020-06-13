@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sing_up.*
 import kotlinx.android.synthetic.main.activity_sing_up.emailEdt
@@ -12,6 +13,10 @@ import org.json.JSONObject
 import kotlin.math.log
 
 class SingUpActivity : BaseAcitivity() {
+    
+//    이메일 / 닉네임 중복검사 결과 저장 변수
+    var isEmailDuplOk = false
+    var isNickNameDuplOk = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +25,36 @@ class SingUpActivity : BaseAcitivity() {
 
     override fun setupevents() {
 
-        signUPBtn.
+        signUPBtn.setOnClickListener{
+            
+//            이메일 중복검사 통과? + 닉네임 중복 검솨 통과?
+            if (!isEmailDuplOk) {
+                
+                Toast.makeText(mcontext, "이메일 중복 검사를 통과해야 합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+//            뒤에 로직 실행하지 않고 이 함수를 강제 종료
+
+            
+            if (!isEmailDuplOk) {
+//                닉네임 중복검사 통과 X
+                Toast.makeText(mcontext, "닉네임 중복검사를 통과해야 합니다.",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener   
+            }
+            
+//          여기가 실행이 된다? => 강제종료 두번을 모두 피했다.
+//          이메일도 / 닉네임도 모두 통과한 상태다.
+            
+//            입력한 이메일 / 비번 / 닉네임을 들고 서버에 가입 신청
+            
+            val email = emailEdt.text.toString()
+            val pw = pwEdt.text.toString()
+            val nickname = nickNameEdt.text.toString()
+            
+//            서버에 /user - put으로 요청. => ServerUtil을 통해 요청
+            
+        }
+        
 
         emailEdt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -95,6 +129,7 @@ class SingUpActivity : BaseAcitivity() {
                     val code = json.getInt("code")
                     if (code == 200) {
                        emailCheckResultTxt.text = "사용해도 좋습니다."
+                        isEmailDuplOk = true
                     }
                     else{
                         runOnUiThread { emailCheckResultTxt.text = "이미 사용중입니다. 다른 이멩일로 다시 체크해주세요."
