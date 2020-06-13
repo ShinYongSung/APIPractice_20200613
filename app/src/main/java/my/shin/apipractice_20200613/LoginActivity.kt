@@ -40,6 +40,15 @@ class LoginActivity : BaseAcitivity() {
                     val codeNum = json.getInt("code")
 
                     if (codeNum == 200) {
+
+                        val data = json.getJSONObject("data")
+                        val user = data.getJSONObject("user")
+                        val loginUserNickName = user.getString("nick_name")
+
+                        runOnUiThread {
+                            Toast.makeText(mcontext, "${loginUserNickName}님 환영합니다.",Toast.LENGTH_SHORT ).show()
+
+                        }
 //                        로그인 성공
                     }
                     else{
