@@ -62,6 +62,11 @@ class SingUpActivity : BaseAcitivity() {
 
                     if (code == 200) {
 
+                        runOnUiThread {
+                            Toast.makeText(mcontext,"회원가입에 성공했습니다.",Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+
                     }
 
                     else{
