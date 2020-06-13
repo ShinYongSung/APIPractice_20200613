@@ -5,9 +5,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sing_up.*
 import kotlinx.android.synthetic.main.activity_sing_up.emailEdt
+import kotlinx.android.synthetic.main.activity_sing_up.signUPBtn
 import my.shin.utils.SeverUtil
 import org.json.JSONObject
 import kotlin.math.log
@@ -21,6 +21,8 @@ class SingUpActivity : BaseAcitivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sing_up)
+        setupevents()
+        setvalues()
     }
 
     override fun setupevents() {
@@ -48,10 +50,30 @@ class SingUpActivity : BaseAcitivity() {
 //            입력한 이메일 / 비번 / 닉네임을 들고 서버에 가입 신청
             
             val email = emailEdt.text.toString()
-            val pw = pwEdt.text.toString()
+            val pw = passwordEdt.text.toString()
             val nickname = nickNameEdt.text.toString()
             
-//            서버에 /user - put으로 요청. => ServerUtil을 통해 요청
+//            서버에 /user - put으로 요청. => ServerUtil을 통해 요청.
+
+            SeverUtil.putRequestSignup(mcontext,email,pw,nickname,object : SeverUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+
+                    val code = json.getInt("code")
+
+                    if (code == 200) {
+
+                    }
+
+                    else{
+
+                        val message = json.getString("message")
+                        runOnUiThread {
+                            Toast.makeText(mcontext, message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+            })
             
         }
         
@@ -71,6 +93,7 @@ class SingUpActivity : BaseAcitivity() {
 
 //                이메일 중복검사를 하라고 안내
                 emailCheckResultTxt.text = "중복검사를 해주세요."
+                isEmailDuplOk = false
             }
 
         })
@@ -83,12 +106,13 @@ class SingUpActivity : BaseAcitivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                nickNameCheckResultTxt.text = "중복확인을 해주세요."
+                isNickNameDuplOk = false
             }
 
 
         })
 
-    }
 
 
         nickNameCheckBtn.setOnClickListener {
@@ -102,23 +126,21 @@ class SingUpActivity : BaseAcitivity() {
                     if (code == 200) {
                         runOnUiThread {
                             nickNameCheckResultTxt.text = "사용해도 좋습니다."
+                            isNickNameDuplOk = true
                         }
-                    }
-                    else {
+                    } else {
                         runOnUiThread {
                             nickNameCheckResultTxt.text = " 중복된 닉네임입니다. 철자 확인하세요."
                         }
 
+                    }
                 }
-
-            }
-            )
-
+            })
 
         }
 
+        emailCheckBtn.setOnClickListener {
 
-        emailcheckBtn.setOnClickListener {
 //            입력한 이메일이 이미 회원으로 있는지 확인 => 서버에 요청
 
             val inputEmail = emailEdt.text.toString()

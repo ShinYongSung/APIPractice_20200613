@@ -114,6 +114,53 @@ class SeverUtil {
 
         }
 
+        fun putRequestSignup(context: Context, email:String, pw:String, nick:String, handler: JsonResponseHandler?) {
+
+//     이 안드로이드 앱이 클라이언트로 동작하도록 도와주는 클래스 => 객체화
+            val  client = OkHttpClient()
+
+//    어떤 기능을 수행하러 가는지 주소 완성 => 로그인 : http://15.165.177.142/user
+            val  urlString = "${BASE_URL}/user"
+
+//    서버에 들고갈 데이터(파라미터)를 첨부. => intent에 putExtra 하듯이. => POST : FormData에 담자.
+            val formData = FormBody.Builder()
+                .add("email", email)
+                .add("password", pw)
+                .add("nick_name", nick)
+                .build()
+
+//    Request 정보를 완성해주자. => 화면으로 따지면 Intent 객체를 만드는 행위.
+            val request = Request.Builder()
+                .url(urlString)
+                .put(formData)
+//                .header() // API가 헤더를 요구하면 여기서 첨부하자.
+                .build()
+//    startActivity처럼 실제로 요청을 날리는 (클라이언트) 코드
+//    요청에 대한 서버의 응답 처리도 같이 코딩(아래는 코딩이 자동적으로 되어있기 때문에 이해하는방향으로)
+            client.newCall(request).enqueue(object  : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+//                    서버에 연결 자체를 실패했을 경우
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+//                    서버에서 응답을 잘 받아왔을 경우
+//                    응답 중에서 body(내용물)을 string으로 저장
+
+                    val bodyString = response.body!!.string()
+
+//                    저장한 String을 JSONObject 양식으로 가공
+                    val json = JSONObject(bodyString)
+                    Log.d("JSON응답", json.toString())
+
+//                    화면(액티비티)에 만들어낸 json 변수를 전달
+                    handler?.onResponse(json)
+                }
+
+            })
+
+        }
+
 
 
     }
