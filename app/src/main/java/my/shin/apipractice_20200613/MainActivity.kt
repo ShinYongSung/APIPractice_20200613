@@ -4,12 +4,16 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import datas.Topic
 import kotlinx.android.synthetic.main.activity_main.*
 import my.shin.utils.ContextUtill
 import my.shin.utils.ServerUtil
 import org.json.JSONObject
 
 class MainActivity : BaseAcitivity() {
+
+    val topicList = ArrayList<Topic>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -42,23 +46,34 @@ class MainActivity : BaseAcitivity() {
     }
 
     override fun setvalues() {
+//        서버에서 토론 주제 목록을 받아와서 리스트뷰의 Array List에 채워주기
 //        서버에서 내 정보를 받아와서 화면에 출력
-        ServerUtil.getRequestMyInfo(mcontext, object : ServerUtil.JsonResponseHandler {
+//        ServerUtil.getRequestMyInfo(mcontext, object : ServerUtil.JsonResponseHandler {
+//            override fun onResponse(json: JSONObject) {
+//
+//                val data = json.getJSONObject("data")
+//                val user = data.getJSONObject("user")
+//                val nickname = user.getString("nick_name")
+//
+//                runOnUiThread {
+//                    loginUserNickNameTxt.text = "${nickname}님 환영합니다."
+//
+//                }
+//
+//
+//            }
+//        })
+        getTopicListFromServer()
+    }
+
+    fun getTopicListFromServer() {
+
+        ServerUtil.getRequestV2MainInfo(mcontext, object : ServerUtil.JsonResponseHandler {
             override fun onResponse(json: JSONObject) {
 
-                val data = json.getJSONObject("data")
-                val user = data.getJSONObject("user")
-                val nickname = user.getString("nick_name")
-
-                runOnUiThread {
-                    loginUserNickNameTxt.text = "${nickname}님 환영합니다."
-
-                }
-
-
             }
-        })
 
+        })
 
     }
 
