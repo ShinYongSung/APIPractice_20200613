@@ -50,6 +50,9 @@ class ViewTopicDetailActivity : BaseAcitivity() {
 
                     else {
                         val message = json.getString("message")
+                        runOnUiThread {
+                            Toast.makeText(mContext. message, Toast.LENGTH_SHORT).show()
+                        }
 
 
 
