@@ -22,6 +22,15 @@ class LoginActivity : BaseAcitivity() {
 
     override fun setupevents() {
 
+        autoLoginCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+//            ischecked에는 지금 어떤 상태가 되었는지  Boolean으로 들어옴.
+//        그값을 contextUtill
+//            Log.d("체크된값", isChecked.toString())
+            ContextUtill.setAutoLogin(mcontext, isChecked)
+        }
+
+    }
+
 
 
 
@@ -113,6 +122,9 @@ class LoginActivity : BaseAcitivity() {
     }
 
     override fun setvalues() {
+
+//        자동로그인 여부를 ContextUtill에서 가져와서 체크박스의 체크값으로 설정
+        autoLoginCheckBox.ischecked = ContextUtill.isAutoLogin(mcontext)
 
     }
 
