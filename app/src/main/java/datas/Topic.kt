@@ -18,6 +18,18 @@ class Topic {
 
             val sideJson = sides.getJ
 
+            for (i in 0..sides.length()-1) {
+
+//            선택진영 하나의 정보가 담긴 JSONObject 추출
+                val sideJson = sides.getJSONObject(i)
+
+//            이 JSON을 선택진영으로 변환해주는 기능 사용
+                val  side = TopicSide.getTopicSideFromJson(sideJson)
+
+//            이 주제의 진영 목록으로 추가
+
+            }
+
             val side = TopicSide.getTopicSideFromJson(sideJson)
 
             return topic
