@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
+import my.shin.utils.ContextUtill
 import my.shin.utils.SeverUtil
 import org.json.JSONObject
 import kotlin.math.log
@@ -51,6 +52,12 @@ class LoginActivity : BaseAcitivity() {
 
                     if (codeNum == 200) {
 //                        서버에서 내려주는 토큰값을 SharedPreference에 저장
+
+                        val data = json.getJSONObject("data")
+
+                        val token = data.getString("token")
+
+                        ContextUtill.setUserToken(mcontext, token)
 
 
 //                        로그인 성공 => 메인 액티비티로 이동
