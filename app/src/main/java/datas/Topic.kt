@@ -16,7 +16,11 @@ class Topic {
             topic.title = json.getString("title")
             topic.imageUrl = json.getString("img_url")
 
-            val sideJson = sides.getJ
+
+//        주제 파싱중 => 선택진영들 JSONArray을 가져오기
+            val sides = json.getJSONArray("sides")
+
+//        JSONArray 내부를 돌면서 파싱
 
             for (i in 0..sides.length()-1) {
 
@@ -28,11 +32,12 @@ class Topic {
 
 //            이 주제의 진영 목록으로 추가
 
+                topic.sides.add(side)
+
             }
 
-            val side = TopicSide.getTopicSideFromJson(sideJson)
-
             return topic
+
         }
     }
 

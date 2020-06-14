@@ -17,17 +17,10 @@ class TopicSide {
         ts.title= json.getString("title")
         ts.voteCount = json.getInt("vote_count")
 
-//        주제 파싱중 => 선택진영들 JSONArray을 가져오기
-        val sides = json.getJSONArray("sides")
-
-//        JSONArray 내부를 돌면서 파싱
-
-
-
         return ts
 
+        }
     }
-}
 
     var id = 0
     var topicId = 0

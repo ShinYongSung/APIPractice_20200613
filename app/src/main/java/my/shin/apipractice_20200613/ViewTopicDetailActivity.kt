@@ -29,6 +29,36 @@ class ViewTopicDetailActivity : BaseAcitivity() {
 
 
     override fun setupevents() {
+
+        voteToFirstBtn.setOnClickListener {
+            ServerUtil.postRequestVote(mContext,mTopic.sides[0].id, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+                }
+            })
+        }
+        voteToSecondBtn.setOnClickListener {
+            ServerUtil.postRequestVote(mContext,mTopic.sides[1].id, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+
+                    val code = json.getInt("code")
+
+                    if (code == 200) {
+                        runOnUiThread {
+                            Toast.makeText(mContext, "참여해주셔서 감사합니다.", Toast.LENGTH_SHORT).show()
+                       }
+                    }
+
+                    else {
+                        val message = json.getString("message")
+
+
+
+                    }
+                }
+            })
+        }
+
+
     }
 
     override fun setvalues() {
@@ -46,40 +76,43 @@ class ViewTopicDetailActivity : BaseAcitivity() {
         
 //        넘겨 받은 id값으로 서버에서 주제의 상세 진행 상황 받아오기
 
-        ServerUtil.getRequestTopicDetail(mContext,mTopicId,object : ServerUtil.JsonResponseHandler{
-            override fun onResponse(json: JSONObject) {
+       fun getTopicdatFromSever(){
+           ServerUtil.getRequestTopicDetail(mContext,mTopicId,object : ServerUtil.JsonResponseHandler{
+               override fun onResponse(json: JSONObject) {
 
-                val code = json.getInt("code")
+                   val code = json.getInt("code")
 
-                if (code == 200){
-                    val data = json.getJSONObject("data")
-                    val topic = data.getJSONObject("topic")
+                   if (code == 200){
+                       val data = json.getJSONObject("data")
+                       val topic = data.getJSONObject("topic")
 
 //                    멤버변수 mtopic에 서버에서 내려준 내용을 피싱
-                    mTopic = Topic.getTopicFromJson(topic)
+                       mTopic = Topic.getTopicFromJson(topic)
 
-                    runOnUiThread {
+                       runOnUiThread {
 //                    받아온 주제의 제목을 화면에 표시
-                        topicTitleTxt.text = mTopic.title
+                           topicTitleTxt.text = mTopic.title
 
-                        Glide.with(mContext).load(mTopic.imageUrl).into(topicImg)
+                           Glide.with(mContext).load(mTopic.imageUrl).into(topicImg)
 
 //                        선택 진영 정보도 출력
-                        firstSideTxt.text = mTopic.sides[0].title
-                        secondSideTxt.text = mTopic.sides[1].title
+                           firstSideTxt.text = mTopic.sides[0].title
+                           secondSideTxt.text = mTopic.sides[1].title
 
 //                        투표 현황도 파싱 된 데이터를 같이 사용.
 
-                        firstSideVoteCountTxt.text = "${mTopic.sides[0].voteCount}표"
-                        SecondSideVoteCountTxt.text = "${mTopic.sides[1].voteCount}표"
-                    }
+                           firstSideVoteCountTxt.text = "${mTopic.sides[0].voteCount}표"
+                           SecondSideVoteCountTxt.text = "${mTopic.sides[1].voteCount}표"
+                       }
 
-                }
+                   }
 
-            }
+               }
 
-        })
+           })
 
+
+       }
     }
 
 
