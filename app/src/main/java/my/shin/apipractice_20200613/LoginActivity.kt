@@ -29,10 +29,6 @@ class LoginActivity : BaseAcitivity() {
             ContextUtill.setAutoLogin(mcontext, isChecked)
         }
 
-    }
-
-
-
 
 
         signUPBtn.setOnClickListener {
@@ -124,7 +120,7 @@ class LoginActivity : BaseAcitivity() {
     override fun setvalues() {
 
 //        자동로그인 여부를 ContextUtill에서 가져와서 체크박스의 체크값으로 설정
-        autoLoginCheckBox.ischecked = ContextUtill.isAutoLogin(mcontext)
+        autoLoginCheckBox.isChecked = ContextUtill.isAutoLogin(mcontext)
 
     }
 
