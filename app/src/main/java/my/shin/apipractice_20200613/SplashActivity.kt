@@ -1,7 +1,6 @@
 package my.shin.apipractice_20200613
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import my.shin.utils.ContextUtill
@@ -33,19 +32,19 @@ class SplashActivity : BaseAcitivity() {
 //            한다고하면? => 저장된 토큰이 있나? => 있다면 => 서버에서 사용자 정보를 가져오는가?
 //            정보를 가져오기까지 성공하면 => 메인화면(토큰의 유효성을 검정)
 
-            if (ContextUtill.isAutoLogin(mcontext)) {
-                if (ContextUtill.getUserToken(mcontext) !=""){
-                    ServerUtil.getRequestMyInfo(mcontext, object : ServerUtil.JsonResponseHandler {
+            if (ContextUtill.isAutoLogin(mContext)) {
+                if (ContextUtill.getUserToken(mContext) !=""){
+                    ServerUtil.getRequestMyInfo(mContext, object : ServerUtil.JsonResponseHandler {
                         override fun onResponse(json: JSONObject) {
 
                             val code = json.getInt("code")
                             if (code ==200) {
-                                val  myIntent = Intent(mcontext, MainActivity::class.java)
+                                val  myIntent = Intent(mContext, MainActivity::class.java)
                                 startActivity(myIntent)
                                 finish()
                             }
                             else {
-                                val  myIntent = Intent(mcontext, LoginActivity::class.java)
+                                val  myIntent = Intent(mContext, LoginActivity::class.java)
                                 startActivity(myIntent)
                                 finish()
                             }
@@ -54,7 +53,7 @@ class SplashActivity : BaseAcitivity() {
                 }
 
                 else {
-                    val  myIntent = Intent(mcontext, LoginActivity::class.java)
+                    val  myIntent = Intent(mContext, LoginActivity::class.java)
                     startActivity(myIntent)
                     finish()
                 }
@@ -62,7 +61,7 @@ class SplashActivity : BaseAcitivity() {
             }
 
             else {
-                val  myIntent = Intent(mcontext, LoginActivity::class.java)
+                val  myIntent = Intent(mContext, LoginActivity::class.java)
                 startActivity(myIntent)
                 finish()
             }

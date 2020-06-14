@@ -30,7 +30,7 @@ class SingUpActivity : BaseAcitivity() {
 //            이메일 중복검사 통과? + 닉네임 중복 검솨 통과?
             if (!isEmailDuplOk) {
                 
-                Toast.makeText(mcontext, "이메일 중복 검사를 통과해야 합니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, "이메일 중복 검사를 통과해야 합니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 //            뒤에 로직 실행하지 않고 이 함수를 강제 종료
@@ -38,7 +38,7 @@ class SingUpActivity : BaseAcitivity() {
             
             if (!isEmailDuplOk) {
 //                닉네임 중복검사 통과 X
-                Toast.makeText(mcontext, "닉네임 중복검사를 통과해야 합니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, "닉네임 중복검사를 통과해야 합니다.",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener   
             }
             
@@ -53,7 +53,7 @@ class SingUpActivity : BaseAcitivity() {
             
 //            서버에 /user - put으로 요청. => ServerUtil을 통해 요청.
 
-            ServerUtil.putRequestSignup(mcontext,email,pw,nickname,object : ServerUtil.JsonResponseHandler{
+            ServerUtil.putRequestSignup(mContext,email,pw,nickname,object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
 
                     val code = json.getInt("code")
@@ -61,7 +61,7 @@ class SingUpActivity : BaseAcitivity() {
                     if (code == 200) {
 
                         runOnUiThread {
-                            Toast.makeText(mcontext,"회원가입에 성공했습니다.",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext,"회원가입에 성공했습니다.",Toast.LENGTH_SHORT).show()
                             finish()
                         }
 
@@ -71,7 +71,7 @@ class SingUpActivity : BaseAcitivity() {
 
                         val message = json.getString("message")
                         runOnUiThread {
-                            Toast.makeText(mcontext, message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -121,7 +121,7 @@ class SingUpActivity : BaseAcitivity() {
         nickNameCheckBtn.setOnClickListener {
             val inputNick = nickNameEdt.text.toString()
 
-            ServerUtil.getRequestDuplicatedCheck(mcontext, "NICKNAME", inputNick, object : ServerUtil.JsonResponseHandler{
+            ServerUtil.getRequestDuplicatedCheck(mContext, "NICKNAME", inputNick, object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
 
                     val code = json.getInt("code")
@@ -148,7 +148,7 @@ class SingUpActivity : BaseAcitivity() {
 
             val inputEmail = emailEdt.text.toString()
 
-            ServerUtil.getRequestDuplicatedCheck(mcontext,"EMAIL", inputEmail, object : ServerUtil.JsonResponseHandler{
+            ServerUtil.getRequestDuplicatedCheck(mContext,"EMAIL", inputEmail, object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
 
                     val code = json.getInt("code")

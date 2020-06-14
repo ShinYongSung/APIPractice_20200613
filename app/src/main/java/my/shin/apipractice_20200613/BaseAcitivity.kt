@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseAcitivity : AppCompatActivity() {
 
-    val mcontext =this
+    val mContext =this
 
     abstract fun setupevents()
     abstract fun setvalues()

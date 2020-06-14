@@ -24,15 +24,15 @@ class MainActivity : BaseAcitivity() {
     override fun setupevents() {
         logoutBtn.setOnClickListener {
 //            정말 로그아웃 할건지? 확인받자
-            val alert = AlertDialog.Builder(mcontext)
+            val alert = AlertDialog.Builder(mContext)
 //            alertdialog는 x로 시작하는 android로
             alert.setTitle("로그아웃 확인")
             alert.setMessage("정말 로그아웃 하시겠습니까?")
             alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
 //                실제로 로그아웃 하는 방법 => 저장된 토크을 삭제 (빈칸으로 변경
-                ContextUtill.setUserToken(mcontext, "")
+                ContextUtill.setUserToken(mContext, "")
 
-                val myIntent = Intent(mcontext, LoginActivity::class.java)
+                val myIntent = Intent(mContext, LoginActivity::class.java)
                 startActivity(myIntent)
 
                 finish()
@@ -68,8 +68,26 @@ class MainActivity : BaseAcitivity() {
 
     fun getTopicListFromServer() {
 
-        ServerUtil.getRequestV2MainInfo(mcontext, object : ServerUtil.JsonResponseHandler {
+        ServerUtil.getRequestV2MainInfo(mContext, object : ServerUtil.JsonResponseHandler {
             override fun onResponse(json: JSONObject) {
+                
+                val code = json.getInt("code")
+                
+                if (code == 200) {
+                    val data = json.getJSONObject("data")
+                    
+//                    JSON Array 추출 => [] 를 가져와야 하므로.
+                    val topics = data.getJSONArray("topics")
+                    
+//                    JSON Object들을 차례대로 추출 반복문
+                    
+                    for (i in 0..topics.length()-1) {
+//                        topics 배열안에서 {} 를 순서대로 (i) JSONObject로 추출
+                        val topicJson = topics.getJSONObject(i)
+                        
+                    }
+                    
+                }
 
             }
 

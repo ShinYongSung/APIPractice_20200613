@@ -26,13 +26,13 @@ class LoginActivity : BaseAcitivity() {
 //            ischecked에는 지금 어떤 상태가 되었는지  Boolean으로 들어옴.
 //        그값을 contextUtill
 //            Log.d("체크된값", isChecked.toString())
-            ContextUtill.setAutoLogin(mcontext, isChecked)
+            ContextUtill.setAutoLogin(mContext, isChecked)
         }
 
 
 
         signUPBtn.setOnClickListener {
-            val myIntent = Intent(mcontext, SingUpActivity::class.java)
+            val myIntent = Intent(mContext, SingUpActivity::class.java)
             startActivity(myIntent)
         }
 
@@ -43,7 +43,7 @@ class LoginActivity : BaseAcitivity() {
 //            실제로 서버에 두개의 변수를 전달해서 로그인 시도
 //            별개의 클래스 (ServerUtil)에 서버 요청 기능을 만들고, 화면에서는 이를 사용.
 
-            ServerUtil.postRequestLogin(mcontext, inputEmail, inputPw, object: ServerUtil.JsonResponseHandler{
+            ServerUtil.postRequestLogin(mContext, inputEmail, inputPw, object: ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
                     Log.d("화면에서 보는 응답",json.toString())
 
@@ -61,12 +61,12 @@ class LoginActivity : BaseAcitivity() {
 
                         val token = data.getString("token")
 
-                        ContextUtill.setUserToken(mcontext, token)
+                        ContextUtill.setUserToken(mContext, token)
 
 
 //                        로그인 성공 => 메인 액티비티로 이동
                         
-                        val myIntent = Intent(mcontext, MainActivity::class.java)
+                        val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
                         
                         
@@ -98,7 +98,7 @@ class LoginActivity : BaseAcitivity() {
 //                        인터넷 연결 쓰레드가 아닌, UI 담당쓰레드가
 
                         runOnUiThread {
-                            Toast.makeText(mcontext, message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
 
                         }
 
@@ -120,7 +120,7 @@ class LoginActivity : BaseAcitivity() {
     override fun setvalues() {
 
 //        자동로그인 여부를 ContextUtill에서 가져와서 체크박스의 체크값으로 설정
-        autoLoginCheckBox.isChecked = ContextUtill.isAutoLogin(mcontext)
+        autoLoginCheckBox.isChecked = ContextUtill.isAutoLogin(mContext)
 
     }
 
