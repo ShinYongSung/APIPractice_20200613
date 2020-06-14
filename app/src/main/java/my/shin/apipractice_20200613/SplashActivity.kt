@@ -13,6 +13,8 @@ class SplashActivity : BaseAcitivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        setupevents()
+        setvalues()
     }
 
     override fun setupevents() {
@@ -41,27 +43,29 @@ class SplashActivity : BaseAcitivity() {
                                 val  myIntent = Intent(mcontext, MainActivity::class.java)
                                 startActivity(myIntent)
                                 finish()
-
                             }
                             else {
                                 val  myIntent = Intent(mcontext, LoginActivity::class.java)
                                 startActivity(myIntent)
                                 finish()
-
                             }
-
                         }
                     })
                 }
 
+                else {
+                    val  myIntent = Intent(mcontext, LoginActivity::class.java)
+                    startActivity(myIntent)
+                    finish()
+                }
+
             }
+
             else {
                 val  myIntent = Intent(mcontext, LoginActivity::class.java)
                 startActivity(myIntent)
                 finish()
             }
-
-
         },3000)
 
 

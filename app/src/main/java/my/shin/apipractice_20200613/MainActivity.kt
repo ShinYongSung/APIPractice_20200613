@@ -27,14 +27,17 @@ class MainActivity : BaseAcitivity() {
             alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
 //                실제로 로그아웃 하는 방법 => 저장된 토크을 삭제 (빈칸으로 변경
                 ContextUtill.setUserToken(mcontext, "")
+
+                val myIntent = Intent(mcontext, LoginActivity::class.java)
+                startActivity(myIntent)
+
+                finish()
+
             })
+
             alert.setNegativeButton("취소",null)
             alert.show()
 
-            val myIntent = Intent(mcontext, LoginActivity::class.java)
-            startActivity(myIntent)
-
-            finish()
         }
     }
 
