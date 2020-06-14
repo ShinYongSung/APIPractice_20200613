@@ -43,20 +43,60 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/firstSideTxt"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="첫번째 선택지"
-                    android:textColor="@color/white"/>
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
 
-                <TextView
-                    android:id="@+id/secondSideTxt"
+                    <TextView
+                        android:id="@+id/firstSideTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="첫번째 선택지"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/firstSideVoteCountTxt"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="~표"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="두번째 선택지"
                     android:layout_marginLeft="20dp"
-                    android:textColor="@color/white"/>
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/secondSideTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="두번째 선택지"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/SecondSideVoteCountTxt"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="~표"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"/>
+
+
+                </LinearLayout>
+
+
+
+
 
 
 
