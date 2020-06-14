@@ -3,14 +3,12 @@ package my.shin.apipractice_20200613
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_sing_up.*
 import kotlinx.android.synthetic.main.activity_sing_up.emailEdt
 import kotlinx.android.synthetic.main.activity_sing_up.signUPBtn
-import my.shin.utils.SeverUtil
+import my.shin.utils.ServerUtil
 import org.json.JSONObject
-import kotlin.math.log
 
 class SingUpActivity : BaseAcitivity() {
     
@@ -55,7 +53,7 @@ class SingUpActivity : BaseAcitivity() {
             
 //            서버에 /user - put으로 요청. => ServerUtil을 통해 요청.
 
-            SeverUtil.putRequestSignup(mcontext,email,pw,nickname,object : SeverUtil.JsonResponseHandler{
+            ServerUtil.putRequestSignup(mcontext,email,pw,nickname,object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
 
                     val code = json.getInt("code")
@@ -123,7 +121,7 @@ class SingUpActivity : BaseAcitivity() {
         nickNameCheckBtn.setOnClickListener {
             val inputNick = nickNameEdt.text.toString()
 
-            SeverUtil.getRequestDuplicatedCheck(mcontext, "NICKNAME", inputNick, object : SeverUtil.JsonResponseHandler{
+            ServerUtil.getRequestDuplicatedCheck(mcontext, "NICKNAME", inputNick, object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
 
                     val code = json.getInt("code")
@@ -150,7 +148,7 @@ class SingUpActivity : BaseAcitivity() {
 
             val inputEmail = emailEdt.text.toString()
 
-            SeverUtil.getRequestDuplicatedCheck(mcontext,"EMAIL", inputEmail, object : SeverUtil.JsonResponseHandler{
+            ServerUtil.getRequestDuplicatedCheck(mcontext,"EMAIL", inputEmail, object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
 
                     val code = json.getInt("code")

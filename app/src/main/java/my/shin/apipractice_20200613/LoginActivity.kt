@@ -6,9 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 import my.shin.utils.ContextUtill
-import my.shin.utils.SeverUtil
+import my.shin.utils.ServerUtil
 import org.json.JSONObject
-import kotlin.math.log
 
 class LoginActivity : BaseAcitivity() {
 
@@ -39,7 +38,7 @@ class LoginActivity : BaseAcitivity() {
 //            실제로 서버에 두개의 변수를 전달해서 로그인 시도
 //            별개의 클래스 (ServerUtil)에 서버 요청 기능을 만들고, 화면에서는 이를 사용.
 
-            SeverUtil.postRequestLogin(mcontext, inputEmail, inputPw, object: SeverUtil.JsonResponseHandler{
+            ServerUtil.postRequestLogin(mcontext, inputEmail, inputPw, object: ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
                     Log.d("화면에서 보는 응답",json.toString())
 
