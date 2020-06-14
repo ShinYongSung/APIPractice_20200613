@@ -26,10 +26,11 @@ class SplashActivity : BaseAcitivity() {
             val  myIntent = Intent(mcontext, LoginActivity::class.java)
             startActivity(myIntent)
 
+            finish()
 //            일정 시간이 지난 뒤에 실행할 내용
         }, 3000)
 
-        finish()
+
 
 
     }
