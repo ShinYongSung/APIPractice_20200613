@@ -108,11 +108,14 @@ class MainActivity : BaseAcitivity() {
 
 //                        topiclist에 완성된 주제를 추가
                         topicList.add(topic)
+
+                        runOnUiThread {
+                            topicAdapter.notifyDataSetChanged()
+                        }
                         
                     }
 
 //                    내용물이 추가되었으니 어댑터에게 새로고침 시켜야함
-                    topicAdapter.notifyDataSetChanged()
 
                     
                 }
