@@ -1,6 +1,15 @@
 package datas
 
+import org.json.JSONObject
+
 class TopicReply {
+
+    companion object {
+        fun getTopicReplyFromJson(json : JSONObject) : TopicReply {
+            val tr = TopicReply
+            return tr
+        }
+    }
 
     var id = 0
     var content = ""
