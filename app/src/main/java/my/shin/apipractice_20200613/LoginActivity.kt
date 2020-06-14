@@ -50,6 +50,9 @@ class LoginActivity : BaseAcitivity() {
                     val codeNum = json.getInt("code")
 
                     if (codeNum == 200) {
+//                        서버에서 내려주는 토큰값을 SharedPreference에 저장
+
+
 //                        로그인 성공 => 메인 액티비티로 이동
                         
                         val myIntent = Intent(mcontext, MainActivity::class.java)
