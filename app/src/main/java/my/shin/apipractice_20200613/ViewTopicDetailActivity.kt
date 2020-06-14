@@ -67,6 +67,11 @@ class ViewTopicDetailActivity : BaseAcitivity() {
 //                        선택 진영 정보도 출력
                         firstSideTxt.text = mTopic.sides[0].title
                         secondSideTxt.text = mTopic.sides[1].title
+
+//                        투표 현황도 파싱 된 데이터를 같이 사용.
+
+                        firstSideVoteCountTxt.text = "${mTopic.sides[0].voteCount}표"
+                        SecondSideVoteCountTxt.text = "${mTopic.sides[1].voteCount}표"
                     }
 
                 }
