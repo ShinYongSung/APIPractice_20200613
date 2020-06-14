@@ -16,6 +16,10 @@ class Topic {
             topic.title = json.getString("title")
             topic.imageUrl = json.getString("img_url")
 
+            val sideJson = sides.getJ
+
+            val side = TopicSide.getTopicSideFromJson(sideJson)
+
             return topic
         }
     }
@@ -23,6 +27,9 @@ class Topic {
     var id = 0
     var title = ""
     var imageUrl = ""
+//    선택 가능 진영 목록을 담는 배열
+    val sides = ArrayList<TopicSide>()
+
 
 
 
