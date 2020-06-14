@@ -1,5 +1,6 @@
 package my.shin.apipractice_20200613
 
+import adapters.TopicAdatper
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +14,8 @@ import org.json.JSONObject
 class MainActivity : BaseAcitivity() {
 
     val topicList = ArrayList<Topic>()
+
+    lateinit var topicAdapter : TopicAdatper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +67,9 @@ class MainActivity : BaseAcitivity() {
 //            }
 //        })
         getTopicListFromServer()
+
+        topicAdapter = TopicAdatper(mContext, R.layout.topic_list_item,topicList)
+        topicListView.adapter = topicAdapter
     }
 
     fun getTopicListFromServer() {
@@ -84,8 +90,19 @@ class MainActivity : BaseAcitivity() {
                     for (i in 0..topics.length()-1) {
 //                        topics 배열안에서 {} 를 순서대로 (i) JSONObject로 추출
                         val topicJson = topics.getJSONObject(i)
+
+//                        추출한 JsonObject => Topic 객체로 변환(클래스에 만든 기능 활용)
+
+                        val topic = Topic.getTopicFromJson(topicJson)
+
+//                        topiclist에 완성된 주제를 추가
+                        topicList.add(topic)
                         
                     }
+
+//                    내용물이 추가되었으니 어댑터에게 새로고침 시켜야함
+                    topicAdapter.notifyDataSetChanged()
+
                     
                 }
 
