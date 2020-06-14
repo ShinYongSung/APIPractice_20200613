@@ -1,0 +1,4 @@
+package datas
+
+class User {
+}
