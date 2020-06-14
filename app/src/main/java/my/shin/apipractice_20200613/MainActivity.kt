@@ -18,10 +18,10 @@ class MainActivity : BaseAcitivity() {
 
     override fun setvalues() {
 //        서버에서 내 정보를 받아와서 화면에 출력
-        ServerUtil.getRequestDuplicatedCheck(mcontext, object : ServerUtil.JsonResponseHandler {
+        ServerUtil.getRequestMyInfo(mcontext, object : ServerUtil.JsonResponseHandler {
             override fun onResponse(json: JSONObject) {
 
-                val data = getJSONObject("data")
+                val data = json.getJSONObject("data")
                 val user = data.getJSONObject("user")
                 val nickname = user.getString("nick_name")
 
