@@ -102,6 +102,15 @@ class ViewTopicDetailActivity : BaseAcitivity() {
         Log.d("넘겨받은 주제 id", mTopicId.toString())
         
 //        넘겨 받은 id값으로 서버에서 주제의 상세 진행 상황 받아오기
+//        onCreate의 하위 기능인 setvalues에서는 서버 통신 x
+        // get getTopicdatFromSever()
+//        자동새로고침 구현 사례
+        
+       Override fun onResume() {
+            super.onResume()
+            getTopicDataFromSever()
+            
+        }
 
        fun getTopicdatFromSever(){
            ServerUtil.getRequestTopicDetail(mContext,mTopicId,object : ServerUtil.JsonResponseHandler{
