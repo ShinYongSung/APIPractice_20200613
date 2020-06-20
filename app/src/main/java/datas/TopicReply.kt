@@ -45,7 +45,7 @@ class TopicReply {
     var sideId = 0
     var userId = 0
     lateinit var user : User
-    lateinit var selectedSide = TopicSide1
+    lateinit var selectedSide : TopicSide
 
 
 //    답글 / 좋아요 / 실헝요 갯수 저장 변수

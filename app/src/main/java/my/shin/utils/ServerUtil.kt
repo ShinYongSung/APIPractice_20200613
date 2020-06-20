@@ -259,7 +259,7 @@ class ServerUtil {
             val request = Request.Builder()
                 .url(urlString)
                 .post(formData)
-                .header("X-X-Http-Token", ContextUtill.getUserToken(context))
+                .header("X-Http-Token", ContextUtill.getUserToken(context))
                 .build()
 //    startActivity처럼 실제로 요청을 날리는 (클라이언트) 코드
 //    요청에 대한 서버의 응답 처리도 같이 코딩(아래는 코딩이 자동적으로 되어있기 때문에 이해하는방향으로)
@@ -302,7 +302,7 @@ class ServerUtil {
             val request = Request.Builder()
                 .url(urlString)
                 .post(formData)
-                .header("X-X-Http-Token", ContextUtill.getUserToken(context))
+                .header("X-Http-Token", ContextUtill.getUserToken(context))
                 .build()
 //    startActivity처럼 실제로 요청을 날리는 (클라이언트) 코드
 //    요청에 대한 서버의 응답 처리도 같이 코딩(아래는 코딩이 자동적으로 되어있기 때문에 이해하는방향으로)
@@ -344,7 +344,7 @@ class ServerUtil {
             val request = Request.Builder()
                 .url(urlString)
                 .post(formData)
-                .header("X-X-Http-Token", ContextUtill.getUserToken(context))
+                .header("X-Http-Token", ContextUtill.getUserToken(context))
                 .build()
 //    startActivity처럼 실제로 요청을 날리는 (클라이언트) 코드
 //    요청에 대한 서버의 응답 처리도 같이 코딩(아래는 코딩이 자동적으로 되어있기 때문에 이해하는방향으로)

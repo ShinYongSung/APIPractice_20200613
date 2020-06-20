@@ -6,21 +6,22 @@ import org.json.JSONObject
 
 class TopicSide {
 
-//    JSON => TopicSide로 변환 가능
-    companion object{
+    //    JSON => TopicSide로 변환 가능
+    companion object {
 
-    fun getTopicSideFromJson(json : JSONObject) : TopicSide{
-        val ts = TopicSide()
+        fun getTopicSideFromJson(json: JSONObject): TopicSide {
+            val ts = TopicSide()
 
-        ts.id = json.getInt("id")
-        ts.topicId = json.getInt("topic_id")
-        ts.title= json.getString("title")
-        ts.voteCount = json.getInt("vote_count")
+            ts.id = json.getInt("id")
+            ts.topicId = json.getInt("topic_id")
+            ts.title = json.getString("title")
+            ts.voteCount = json.getInt("vote_count")
 
-        return ts
+            return ts
 
         }
     }
+
 
     var id = 0
     var topicId = 0
