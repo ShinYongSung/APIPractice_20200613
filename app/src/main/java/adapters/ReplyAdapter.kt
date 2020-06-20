@@ -66,7 +66,7 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
 //                    data = TopicReply.getTopicReplyFromJson()
 //                    목록에서 꺼낸 data 변수의 좋아요 갯수 / 싫어요 갯수를 직접 변경
                     data.likeCount = reply.getInt("like_count")
-                    data.likeCount = reply.getInt("dislike_count")
+                    data.dislikeCount = reply.getInt("dislike_count")
 
 //                    목록의 내용을 일부 변경 => 반영하려면
 //                    어댑터.notifyDataSetChanged() 실행 필요함
@@ -77,16 +77,26 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
                     Handler(Looper.getMainLooper()).post {
                         notifyDataSetChanged()
                     }
+                }
+            })
+        }
 
+        dislikeBtn.setOnClickListener {
+            ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id, false, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
+                    val dataObj = json.getJSONObject("data")
+                    val reply = dataObj.getJSONObject("reply")
+
+
+                    data.likeCount = reply.getInt("like_count")
+                    data.dislikeCount = reply.getInt("dislike_count")
+                    Handler(Looper.getMainLooper()).post {
+                        notifyDataSetChanged()
+                    }
 
                 }
 
             })
-
-        }
-
-        dislikeBtn.setOnClickListener {
-            ServerUtil.postRequestReplyLikeOrDislike(mContext,data.id, false, )
 
         }
 
