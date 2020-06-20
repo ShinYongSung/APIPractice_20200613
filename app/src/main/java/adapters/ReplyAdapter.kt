@@ -39,12 +39,16 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
         val replyBtn = row.findViewById<Button>(R.id.replyBtn)
         val likeBtn = row.findViewById<Button>(R.id.likeBtn)
         val dislikeBtn = row.findViewById<Button>(R.id.dislikeBtn)
+        val selectedSideTitleTxt = row.findViewById<TextView>(R.id.selectedSideTitleTxt)
 
 
         val data = mList[position]
 
         writerNicknameTxt.text = data .user.nickName
         contentText.text = data .content
+
+//        어떤 댓글을 옹호하는지? (진영 이름) 양식으로 표현
+        selectedSideTitleTxt.text = "(${data.selectedSide.title})"
 
         replyBtn.text = "답글 : ${data .replyCount}"
         likeBtn.text = "좋아요 : ${data .likeCount}"
