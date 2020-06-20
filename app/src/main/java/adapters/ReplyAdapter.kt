@@ -24,10 +24,12 @@ class ReplyAdapter(val mContext, val resId:Int, val mList:List<TopicReply>): Arr
 
         val row = temprow!!
 
-    val writerNicknameTxt = row.findviewById<TextView>(R.id.writerNicfkNameTxt)
-    val contentText = row.findViewById <TextView>(R.id.contentTxt)
+        val writerNicknameTxt = row.findviewById<TextView>(R.id.writerNicfkNameTxt)
+        val contentText = row.findViewById <TextView>(R.id.contentTxt)
 
-    val data = mList[Transliterator.Position]
+        val data = mList[Transliterator.Position]
+
+        contentTxt.text = data.content
 
         writerNickNameTxt.text = data.user.nickName
         contentTxt.text = data.content

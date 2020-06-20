@@ -1,5 +1,8 @@
 package my.shin.apipractice_20200613
 
+import adapters.EditReplyActivity
+import adapters.ReplyAdapter
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +22,8 @@ class ViewTopicDetailActivity : BaseAcitivity() {
 
     lateinit var mTopic : Topic
 
+    lateinit var mReplyAdapter : ReplyAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_topic_detail)
@@ -29,6 +34,13 @@ class ViewTopicDetailActivity : BaseAcitivity() {
 
 
     override fun setupevents() {
+
+        replyBtn.setOnClickListener {
+
+            val myIntent = Intent(mContext, EditReplyActivity::class.java)
+            myIntent.putExtra("TopicTitle", mTopic.title)
+            startActivity(myIntent)
+        }
 
         voteToFirstBtn.setOnClickListener {
             ServerUtil.postRequestVote(mContext,mTopic.sides[0].id, object : ServerUtil.JsonResponseHandler{
@@ -51,7 +63,7 @@ class ViewTopicDetailActivity : BaseAcitivity() {
                     else {
                         val message = json.getString("message")
                         runOnUiThread {
-                            Toast.makeText(mContext. message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                         }
 
 
@@ -106,6 +118,9 @@ class ViewTopicDetailActivity : BaseAcitivity() {
 
                            firstSideVoteCountTxt.text = "${mTopic.sides[0].voteCount}표"
                            SecondSideVoteCountTxt.text = "${mTopic.sides[1].voteCount}표"
+
+                           mReplyAdapter = ReplyAdapter(mContext, R.layout.topic_list_item,mTopic.replies)
+                           replyListView.adapter = mReplyAdapter
                        }
 
                    }
