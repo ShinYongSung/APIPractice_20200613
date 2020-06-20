@@ -14,19 +14,13 @@ class User {
 //            들어오는  json으로 u의 내용 채우기
 
             u.id = json.getInt("id")
-            u.id = json.getString("email")
+            u.email = json.getString("email")
             u.nickName = json.getString("nick_name")
 
             return u
 
-    }
-
-
-
-
+        }
 
     }
-    )
-
 
 }
