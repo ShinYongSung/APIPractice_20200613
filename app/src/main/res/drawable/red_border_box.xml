@@ -1,85 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <?xml version="1.0" encoding="utf-8"?>
-    <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <item
-            android:state_pressed="false">
+    <item android:state_pressed="false">
 
-            <layer-list>
+        <layer-list>
 
-                <item>
-                    <shape
-                        android:shape="rectangle">
-                        <solid
-                            android:color="@color/darkgray">
-                        </solid>
-                    </shape>
-                </item>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/darkGray"></solid>
+                </shape>
+            </item>
 
-                <item
-                    android:top="1dp"
-                    android:left="1dp"
-                    android:right="1dp"
-                    android:bottom="10dp">
+            <item android:bottom="10dp" android:left="1dp" android:right="1dp" android:top="1dp">
 
-                    <shape
-                        android:shape="rectangle">
-                        <solid
-                            android:color="@color/red">
-                        </solid>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/red"></solid>
 
-                    </shape>
+                </shape>
 
 
-
-                </item>
-
+            </item>
 
 
-
-            </layer-list>
-
-
-        </item>
-
-        <item
-            android:state_pressed="true">
-
-            <layer-list>
-                <item>
-                    <shape
-                        android:shape="rectangle">
-                        <solid
-                            android:color="@color/red"/>
-                    </shape>
-
-                </item>
-
-                <item
-                    android:top="1dp"
-                    android:bottom="1dp"
-                    android:left="1dp"
-                    android:right="1dp">
-
-                    <shape
-                        android:shape="rectangle">
-                        <solid
-                            android:color="@color">
-
-                        </solid>
-
-                    </shape>
-
-                </item>
-
-            </layer-list>
-
-        </item>
+        </layer-list>
 
 
+    </item>
 
+    <item android:state_pressed="true">
 
-    </selector>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/red" />
+                </shape>
+
+            </item>
+
+            <item android:bottom="1dp" android:left="1dp" android:right="1dp" android:top="1dp">
+
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/darkGray">
+
+                    </solid>
+
+                </shape>
+
+            </item>
+
+        </layer-list>
+
+    </item>
+
 
 </selector>

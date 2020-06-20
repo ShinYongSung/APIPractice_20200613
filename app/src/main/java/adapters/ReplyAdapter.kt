@@ -57,9 +57,7 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
             likeBtn.setBackgroundResource(R.drawable.red_border_box)
 //            글씨 색 : 빨간색 => res => colors => red를 사용
             dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
-
             likeBtn.setTextColor(mContext.resources.getColor(R.color.red))
-
             dislikeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
         }
 
@@ -70,6 +68,7 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
             dislikeBtn.setBackgroundResource(R.drawable.blue_border_box)
             likeBtn.setTextColor(mContext.resources.getColor(R.color.red))
             dislikeBtn.setTextColor(mContext.resources.getColor(R.color.blue))
+
         }
         else {
 //            아무것도 찍지 않은 경우
@@ -77,7 +76,6 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
             likeBtn.setBackgroundResource(R.drawable.gray_border_box)
             dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
             likeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
-
             dislikeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
 
         }
@@ -101,6 +99,9 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
                     data.likeCount = reply.getInt("like_count")
                     data.dislikeCount = reply.getInt("dislike_count")
 
+                    data.isMyLike = reply.getBoolean("my_like")
+                    data.isMyDislike = reply.getBoolean("my_dislike")
+
 //                    목록의 내용을 일부 변경 => 반영하려면
 //                    어댑터.notifyDataSetChanged() 실행 필요함
 //                    이미 어댑터 내부에 있는 상황 => 곧바로 notifyDataSetChanged() 실행 가능
@@ -123,16 +124,15 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
 
                     data.likeCount = reply.getInt("like_count")
                     data.dislikeCount = reply.getInt("dislike_count")
+                    data.isMyLike = reply.getBoolean("my_like")
+                    data.isMyDislike = reply.getBoolean("my_dislike")
+
                     Handler(Looper.getMainLooper()).post {
                         notifyDataSetChanged()
                     }
-
                 }
-
             })
-
         }
-
         return row
     }
 
