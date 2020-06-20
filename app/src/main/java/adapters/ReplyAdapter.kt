@@ -1,7 +1,9 @@
 package adapters
 
+import android.icu.text.Transliterator
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import datas.TopicReply
 import my.shin.apipractice_20200613.R
 import my.shin.utils.ServerUtil
@@ -21,6 +23,14 @@ class ReplyAdapter(val mContext, val resId:Int, val mList:List<TopicReply>): Arr
         }
 
         val row = temprow!!
+
+    val writerNicknameTxt = row.findviewById<TextView>(R.id.writerNicfkNameTxt)
+    val contentText = row.findViewById <TextView>(R.id.contentTxt)
+
+    val data = mList[Transliterator.Position]
+
+        writerNickNameTxt.text = data.user.nickName
+        contentTxt.text = data.content
 
         return row
 

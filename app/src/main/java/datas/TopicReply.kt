@@ -16,6 +16,9 @@ class TopicReply {
 //            tr.user =??  // 의견 JSON의 항목중 user JSONOBJECT를 => ser 클래스에 전달
 //            user 클래스가 Json을 받아서 => User로 변환해서 리턴. 그걸 tr.user에 대입
 
+            val userJson = json.getJSONObject("user")
+            tr.user = User.getUserFromJson(userJson)
+
 
             return tr
         }
