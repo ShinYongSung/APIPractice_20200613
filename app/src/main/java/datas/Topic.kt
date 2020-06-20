@@ -70,10 +70,10 @@ class Topic {
     val sides = ArrayList<TopicSide>()
 //    의견 목록을 담는 배열
 
-    val replies = ArrayList<TopicReply>
+    val replies = ArrayList<TopicReply>()
 
 //    선택진영의 id값 : -1일 경우 미선택으로 처리 (투표 안함)
-    val mySideId = -1
+    var mySideId = -1
 //    선택 진영이 있을 경우 그 실제 데이터 저장 공간 => 투표를 안한경우 null 이어야함
 //    선택 진영이 엇어야 하니까. => TopicSide? 로 저장.
     var mySelectedSide : TopicSide? = null
