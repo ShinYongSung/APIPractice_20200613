@@ -34,6 +34,8 @@ class ViewReplyDetailActivity : BaseAcitivity() {
 
             ServerUtil.postRequestReReply(mContext,mReplyId, content, object : ServerUtil.JsonResponseHandler{
                 override fun onResponse(json: JSONObject) {
+//                    서버에서 다시 의견에 대한 상세 현황 가져오기
+                    getReplyDetailFromSever()
                 }
             })
 
@@ -74,6 +76,10 @@ class ViewReplyDetailActivity : BaseAcitivity() {
 
 //                화면에 뿌려질 데이터를 받아보자
                     val reReplies = reply.getJSONArray("replies")
+
+//                    기존에 담겨있던 답글 목록을 날리고
+
+                    reReplyList.clear()
 
                     for (i in 0..reReplies.length() - 1) {
 //                    jsonarry내부의 객체를 => TopicReply로 변환 -> re ReplyList에 추가
