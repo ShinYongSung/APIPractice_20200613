@@ -1,8 +1,10 @@
 package my.shin.apipractice_20200613
 
 import adapters.ReReplyAdapter
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import datas.TopicReply
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
@@ -61,6 +63,15 @@ class ViewReplyDetailActivity : BaseAcitivity() {
 
 //        서버에서 의견 상세 현황 가져오기
         getReplyDetailFromSever()
+
+//        답글 등록시 성공 관련 UI 처리
+
+        runOnUiThread {
+            reReplyContentEdt.setText("")
+
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(reReplyContentEdt.windowToken, 0)
+        }
     }
 
     fun getReplyDetailFromSever() {
@@ -81,7 +92,9 @@ class ViewReplyDetailActivity : BaseAcitivity() {
 
                     reReplyList.clear()
 
-                    for (i in 0..reReplies.length() - 1) {
+//                    다시 답글들을 추가해보자자
+
+                   for (i in 0..reReplies.length() - 1) {
 //                    jsonarry내부의 객체를 => TopicReply로 변환 -> re ReplyList에 추가
                         reReplyList.add(TopicReply.getTopicReplyFromJson(reReplies.getJSONObject(i)))
                     }
@@ -92,6 +105,11 @@ class ViewReplyDetailActivity : BaseAcitivity() {
                         contentTxt.text = mReply.content
 //                        서버에서 받아온 대댓글을 리스트뷰에 반영 -><
                         mReReplyAdapter.notifyDataSetChanged()
+
+//                        내가 단 답글을 보기 편하도록 스크롤 처리
+//                        답글 10개 => ArrayList는 0~9번까지.
+//                        10개답글 => 9번을 보러 가는게 마지막으로 이동하는 행위임
+                        reReplyListview.smoothScrollToPosition(reReplyList.size-1)
 
 //                        서
 
