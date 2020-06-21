@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import datas.TopicReply
+import kotlinx.android.synthetic.main.activity_view_reply_detail.*
 import my.shin.apipractice_20200613.R
 import my.shin.apipractice_20200613.ViewReplyDetailActivity
 import my.shin.utils.ServerUtil
@@ -43,6 +44,10 @@ class ReReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRe
         val selectedSideTitleTxt = row.findViewById<TextView>(R.id.selectedSideTitleTxt)
 
         val data = mList[position]
+
+        writerNicknameTxt.text = data.user.nickName
+        selectedSideTitleTxt.text = "(${data.selectedSide.title})"
+        contentText.text = data.content
 
         return row
     }

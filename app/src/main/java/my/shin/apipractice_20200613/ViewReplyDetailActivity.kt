@@ -32,7 +32,11 @@ class ViewReplyDetailActivity : BaseAcitivity() {
     override fun setvalues() {
         mReplyId = intent.getIntExtra("reply_id", -1)
 
+//        어댑터를 먼저 생성 => 답글 목록을 뿌려준다고 명시
+
         mReReplyAdapter = ReReplyAdapter(mContext, R.layout.topic_re_reply_list_item, reReplyList)
+
+//        어댑터와 리스트뷰 연결
         reReplyListview.adapter = mReReplyAdapter
 
 //        서버에서 의견 상세 현황 가져오기
@@ -62,8 +66,10 @@ class ViewReplyDetailActivity : BaseAcitivity() {
                         sideTitleTxt.text = mReply.selectedSide.title
                         writerNickNameTxt.text = mReply.user.nickName
                         contentTxt.text = mReply.content
-//                        서버에서 받아온 대댓글을 리스트뷰에 반영
+//                        서버에서 받아온 대댓글을 리스트뷰에 반영 -><
                         mReReplyAdapter.notifyDataSetChanged()
+
+//                        서
 
 //                    notifydatasetchage 필요함
                     }
