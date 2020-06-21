@@ -1,6 +1,7 @@
 package adapters
 
 import android.content.Context
+import android.content.Intent
 import android.icu.text.Transliterator
 import android.os.Handler
 import android.os.Looper
@@ -12,6 +13,7 @@ import android.widget.Button
 import android.widget.TextView
 import datas.TopicReply
 import my.shin.apipractice_20200613.R
+import my.shin.apipractice_20200613.ViewReplyDetailActivity
 import my.shin.utils.ServerUtil
 import org.json.JSONObject
 
@@ -83,6 +85,16 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
             dislikeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
 
         }
+        
+//        답글버튼 눌림 처리
+        
+        replyBtn.setOnClickListener { 
+            val myIntent = Intent(mContext,ViewReplyDetailActivity ::class.java)
+            
+//            Adapter에서 직접 start Activity 불가
+//            mContext  도움 받아서 startActivity 실행
+            mContext.startActivities(myIntent)}
+        
 
 
         //    좋아요 / 싫어요 이벤트 처리
@@ -137,6 +149,10 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
                 }
             })
         }
+
+
+
+
         return row
     }
 
