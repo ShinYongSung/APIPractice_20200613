@@ -90,10 +90,12 @@ class ReplyAdapter(val mContext:Context, val resId:Int, val mList:List<TopicRepl
         
         replyBtn.setOnClickListener { 
             val myIntent = Intent(mContext,ViewReplyDetailActivity ::class.java)
+            myIntent.putExtra("reply_id".data.id)
             
 //            Adapter에서 직접 start Activity 불가
 //            mContext  도움 받아서 startActivity 실행
-            mContext.startActivities(myIntent)}
+            mContext.startActivities(myIntent)
+        }
         
 
 

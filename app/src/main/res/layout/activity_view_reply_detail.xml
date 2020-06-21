@@ -8,6 +8,7 @@
     tools:context=".ViewReplyDetailActivity">
 
     <LinearLayout
+        android:id="@+id/sideTitleTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -22,6 +23,7 @@
             android:background="@drawable/gray_border_box"/>
 
         <TextView
+            android:id="@+id/writerNickNameTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="작성자 닉네임"
@@ -38,6 +40,7 @@
         android:layout_height="1dp"
         android:background="@color/darkGray"/>
     <TextView
+        android:id="@+id/contentTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="원본 의견 작성 내용"
@@ -48,6 +51,31 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/darkGray"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="의견에 대한 답글 입력"
+            android:singleLine="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성"/>
+
+
+    </LinearLayout>
 
 
 
