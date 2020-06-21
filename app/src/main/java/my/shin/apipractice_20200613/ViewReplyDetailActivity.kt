@@ -2,9 +2,12 @@ package my.shin.apipractice_20200613
 
 import adapters.ReReplyAdapter
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import datas.TopicReply
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
@@ -28,6 +31,47 @@ class ViewReplyDetailActivity : BaseAcitivity() {
     }
 
     override fun setupevents() {
+
+//        답글 삭제 이벤트 (리스트뷰 아이템 롱클릭)
+
+        reReplyListview.setOnItemClickListener { parent, view, position, id ->
+
+            val clickedReReply = reReplyList[position]
+
+//            if (clickedReReply.userId ==)
+
+            val alert = AlertDialog.Builder(mContext)
+            alert.setTitle("답글 삭제")
+            alert.setMessage("정말 답글을 삭제하시겠습니까? 받은 받은 좋아요 이력이 모두 삭제됩니다.")
+            alert.setPositiveButton("확인",DialogInterface,DialogInterface.OnClickListener{dialog, which ->
+
+                ServerUtil.deleteRequestReply(mContext,clickedReReply, object : ServerUtil.JsonResponseHandler{
+                    override fun onResponse(json: JSONObject) {
+
+//                        서버의 메세지를 토스트로 출력
+                        val message = json.getString("message")
+                        runOnUiThread {Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show()
+                        }
+
+//                        code :200 -> 성공
+                        val code = json.getInt("code")
+
+                        if (code ==200) {
+//                            실제 삭제 ㅣ 목록 변화 필요함 = > 서버에서 다시 불러오기
+                            getReplyDetailFromSever()
+                        }
+
+                    }
+
+                })
+
+            })
+            alert.setNegativeButton("취소",null)
+            alert.show()
+
+
+            return@setOnItemClickListener true
+        }
 
         postReplyBtn.setOnClickListener {
             val content = reReplyContentEdt.text.toString()

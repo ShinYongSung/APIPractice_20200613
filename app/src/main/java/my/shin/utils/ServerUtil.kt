@@ -190,6 +190,47 @@ class ServerUtil {
             })
         }
 
+        fun deleteRequestReply(context: Context, replyId: Int, handler: JsonResponseHandler?) {
+
+            val  client = OkHttpClient()
+
+            val urlBuilder = "${BASE_URL}/topic_reply".toHttpUrlOrNull()!!.newBuilder()
+
+            urlBuilder.addEncodedQueryParameter("type_id",replyId.toString())
+//            urlBuilder.addEncodedQueryParameter("value", inputVal)
+
+//            첨부 데이터가 포홤된 주소 확인
+            val urlString = urlBuilder.build().toString()
+            Log.d("완성된주소",urlString)
+
+//            Request를 만들어서 최종 전송 정보 마무리
+            val request = Request.Builder()
+                .url(urlString)
+                .delete()
+                .header("X-Http-Token", ContextUtill.getUserToken(context))
+//            헤더를 요구하면 추가
+                .build()
+
+            client.newCall(request).enqueue(object  : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+//                    서버에 연결 자체를 실패했을 경우
+                }
+                override fun onResponse(call: Call, response: Response) {
+//                    서버에서 응답을 잘 받아왔을 경우
+//                    응답 중에서 body(내용물)을 string으로 저장
+
+                    val bodyString = response.body!!.string()
+
+//                    저장한 String을 JSONObject 양식으로 가공
+                    val json = JSONObject(bodyString)
+                    Log.d("JSON응답", json.toString())
+
+//                    화면(액티비티)에 만들어낸 json 변수를 전달
+                    handler?.onResponse(json)
+                }
+            })
+        }
+
         fun getRequestV2MainInfo(context: Context, handler: JsonResponseHandler?) {
             val  client = OkHttpClient()
 
